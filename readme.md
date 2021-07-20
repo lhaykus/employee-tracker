@@ -14,11 +14,11 @@ https://drive.google.com/file/d/1IPm5M379qyHjMUjuXlEX-WOoP8LVgipP/view
 
 ![gif-of-viewing-content](./assets/viewinggif.gif)
 
-## Adding departments, roles, and employees
+## Updating an employees role
 
 ![updating-data](./assets/updating.gif)
 
-## Updating an employees role
+## Adding departments, roles, and employees
 
 ![adding-data](./assets/adding.gif)
 
