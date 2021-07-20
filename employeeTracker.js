@@ -1,6 +1,7 @@
 //Required packages
 const mysql = require('mysql');
 const inquirer = require('inquirer');
+const console = require('console');
 
 
 
@@ -18,6 +19,8 @@ const connection = mysql.createConnection({
 
     database: 'employee_db',
 });
+
+
 
 
 
@@ -112,7 +115,7 @@ const getAllEmployees = async () => {
         //For each employee add their ID, first and last name, the department ID and manager ID
         res.forEach(employee => {
             
-            console.log(`ID: ${employee.id} -- Name: ${employee.first_name} ${employee.last_name} -- Role ID: ${employee.role_id} -- Manager ID: ${employee.manager_id}`);
+            console.table([[`ID: ${employee.id} -- Name: ${employee.first_name} ${employee.last_name} -- Role ID: ${employee.role_id} -- Manager ID: ${employee.manager_id}`]]);
         });
         //Return to the starting function 
         start();
@@ -129,7 +132,7 @@ const getAllDepartments = async () => {
         //For each department add their name
         res.forEach(department => {
             
-            console.log(department.name);
+            console.table([department.name]);
         });
         //Return to the starting function 
         start();
