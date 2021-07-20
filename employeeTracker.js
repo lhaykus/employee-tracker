@@ -120,7 +120,42 @@ const getAllRoles = async () => {
 
 
 //Function to update employee role
+//Have to verify what employee they want to change role for and then grab role_id and change it 
 const updateEmployeeRoles = async () => {
+    connection.query('SELECT last_name from employee', async (err, res) => {
+        try {
+        const { last_name } = await inquirer.prompt ([ 
+            {
+                name: 'last_name',
+                message: 'What is the last name of the employee you want to change the role of?',
+                type: 'list',
+                choices: res.map(({last_name}) => last_name),
+                
+            }
+            
+        ]);
+        const { role_id } = await inquirer.prompt ([ 
+            {
+                name: 'role_id', 
+                message: 'What would you like to update the role id to?',
+                 type: 'input',
+            }
+        ]);
+        const query = 'UPDATE employee SET role_id =? WHERE last_name =?';
+        connection.query(query, [parseInt(role_id), last_name], (err, res) => {
+            if(err) throw err;
+            console.log(`Role updated for ${res.last_name} to ${res.role_id}`)
+        })
+
+        getAllEmployees();
+        
+        
+        } catch (error) {
+            console.log(error);
+            connection.end();
+            
+        }
+    })
 
 }
 
