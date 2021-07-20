@@ -75,6 +75,10 @@ const doWhatUserPicks = async (userChoice) => {
     if (userChoice === 'Add an employee') {
         addEmployee();
     };
+
+    if(userChoice === 'Exit') {
+        connection.end();
+    }
 };
 
 //Function to get all the employess
@@ -124,16 +128,19 @@ const getAllRoles = async () => {
 const updateEmployeeRoles = async () => {
     connection.query('SELECT last_name from employee', async (err, res) => {
         try {
+        //Asking what last name they want to change
         const { last_name } = await inquirer.prompt ([ 
             {
                 name: 'last_name',
                 message: 'What is the last name of the employee you want to change the role of?',
                 type: 'list',
+                //.map to create a new array holding the last names
                 choices: res.map(({last_name}) => last_name),
                 
             }
             
         ]);
+        //Asking what they would like the new role id to be
         const { role_id } = await inquirer.prompt ([ 
             {
                 name: 'role_id', 
@@ -141,10 +148,11 @@ const updateEmployeeRoles = async () => {
                  type: 'input',
             }
         ]);
+        //updating employee to entered role id where the last name = to the last name user chose 
         const query = 'UPDATE employee SET role_id =? WHERE last_name =?';
         connection.query(query, [parseInt(role_id), last_name], (err, res) => {
             if(err) throw err;
-            console.log(`Role updated for ${res.last_name} to ${res.role_id}`)
+            console.log(`Role updated for ${last_name} to Role ID: ${role_id}`)
         })
 
         getAllEmployees();
