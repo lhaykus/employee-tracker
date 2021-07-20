@@ -75,6 +75,10 @@ npm i mysql
 
 npm i inquirer
 ```
+Add the employeeTracker.sql table and the seed.sql rows to WorkBench to create the database
+
+
+
 Open terminal and start the server by typing
 ```
 node employeeTracker.js
