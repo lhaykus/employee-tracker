@@ -1,6 +1,7 @@
 //Required packages
 const mysql = require('mysql');
 const inquirer = require('inquirer');
+const { async } = require('rxjs');
 
 
 
@@ -40,6 +41,7 @@ const start = () => {
             'Add a department',
             'Add a role',
             'Add an employee',
+            'Delete a department',
             'Exit',
         ],
     })
@@ -73,6 +75,12 @@ const start = () => {
                 case 'Add an employee':
                     addEmployee();
                     break;
+
+                case 'Delete a department':
+                    deleteDepartment();
+                    break;
+
+                
 
                 case 'Exit':
                 //Ends the connection and exists out of the commnad line
@@ -272,5 +280,36 @@ const addEmployee = async () => {
         //If error end the connection 
         connection.end();
 
-    }
-}
+    };
+};
+
+
+//function to delete departments
+const deleteDepartment = () => {
+    connection.query('SELECT name FROM department', async (err, res) => {
+        if (err) throw err;
+
+        try {
+        const departmentToDelete = await inquirer.prompt([
+            {
+                message: 'Which department would you like to delete?',
+                name: 'name',
+                type: 'list',
+                choices: res.map(({ name }) => name),
+            }
+        ]);
+        connection.query('DELETE FROM department WHERE name =?', departmentToDelete.name, (err, res) => {
+            if (err) throw err;
+            console.log(`Deleted department:`, res);
+            getAllDepartments();
+        });
+        
+
+            
+        } catch (error) {
+            console.log(error);
+            connection.end();
+            
+        };
+    });
+};
