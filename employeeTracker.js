@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const inquirer = require('inquirer');
 const { async, first } = require('rxjs');
 const { toUnicode } = require('punycode');
+const { RSA_NO_PADDING } = require('constants');
 
 
 
@@ -244,7 +245,7 @@ const addRole = async () => {
         //parseInt turns strings to intergers for the id
         connection.query(query, [title, parseFloat(salary), parseInt(department_id)], (err, res) => {
             if (err) throw err;
-            console.log(`Title: ${res.title} -- Yearly Salary ${res.salary} --Department ID ${res.department_id}`);
+            console.log(`Title: ${title} -- Yearly Salary ${salary} --Department ID ${department_id}`);
         });
         //Showing all the roles including those which were just added
         getAllRoles();
@@ -283,7 +284,7 @@ const addEmployee = async () => {
         const query = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
         connection.query(query, [first_name, last_name, parseInt(role_id), parseInt(manager_id)], (err, res) => {
             if (err) throw err;
-            console.log(`First Name: ${res.first_name} --Last Name: ${res.last_name} --Role ID: ${res.role_id} --Manager ID: ${res.manager_id}`);
+            console.log(`First Name: ${first_name} --Last Name: ${last_name} --Role ID: ${role_id} --Manager ID: ${manager_id}`,);
 
         });
         //Shows all the employee including those that were just included 
@@ -336,7 +337,7 @@ const deleteRole = () => {
         try {
         const roleToBeDeleted = await inquirer.prompt([
             {
-                message: 'Which role  would you like to delete?',
+                message: 'Which role would you like to delete?',
                 name: 'title',
                 type: 'list',
                 choices: res.map(({ title }) => title),
@@ -359,10 +360,33 @@ const deleteRole = () => {
 
 //Function to delete an employee
 const deleteEmployee = () => {
-    connection.query('SELECT last_name, first_name FROM employee', async (err, res) => {
+    connection.query('SELECT first_name FROM employee', async (err, res) => {
         if (err) throw err;
 
         try {
+        const deletedEmployee = await inquirer.prompt([
+            {
+                message: 'What is the name of the employee you want to delete?',
+                name: `first_name`,
+                type: 'list',
+                choices: res.map(({ first_name }) => first_name),
+            }
+        ]);
+        connection.query('DELETE FROM employee WHERE first_name=?', deletedEmployee.first_name, (err, res) => {
+            if(err) throw err;
+            console.log(`Deleted employee:`, res);
+            getAllEmployees();
+        });
+    }catch (error) {
+        console.log(error);
+        connection.end();
+    };
+});
+
+
+
+
+       /*     
         const { last_name, first_name } = await inquirer.prompt([
             {
                 message: 'What is the  name of the employee you want to delete?',
@@ -393,4 +417,5 @@ const deleteEmployee = () => {
             
         }
     })
+*/
 }
