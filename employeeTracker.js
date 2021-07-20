@@ -1,9 +1,7 @@
 //Required packages
 const mysql = require('mysql');
 const inquirer = require('inquirer');
-const { async, first } = require('rxjs');
-const { toUnicode } = require('punycode');
-const { RSA_NO_PADDING } = require('constants');
+
 
 
 

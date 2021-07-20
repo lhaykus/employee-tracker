@@ -1,8 +1,62 @@
 # Employee Tracker
 
-An app on the terminal using node, inquirer and MySQL to update, view and add employees, roles and departments.
+An app on the terminal using node.js, inquierer, and MySQL to update, delete, view and add employees, roles, and departments for a compnay.
 
-## Final App
+Video of app on Youtube:
+https://youtu.be/OT55jHXrrpQ
+
+Google Drive: 
+https://drive.google.com/file/d/1IPm5M379qyHjMUjuXlEX-WOoP8LVgipP/view
+
+# Final App
+
+## Viewing all Departments, role and employess
+
+![gif-of-viewing-content](./assets/viewinggif.gif)
+
+## Adding departments, roles, and employees
+
+![updating-data](./assets/updating.gif)
+
+## Updating an employees role
+
+![adding-data](./assets/adding.gif)
+
+## Deleting departments, roles and employees and exiting the server
+
+![deleting-data](./assets/deleting.gif)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
