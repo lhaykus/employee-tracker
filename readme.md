@@ -2,7 +2,7 @@
 
 An app on the terminal using node.js, inquierer, and MySQL to update, delete, view and add employees, roles, and departments for a compnay.
 
-Video of app on Youtube:
+Video of app on Youtube (clearest viewing of the working app):
 https://youtu.be/OT55jHXrrpQ
 
 Google Drive: 

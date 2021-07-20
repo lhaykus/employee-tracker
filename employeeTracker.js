@@ -107,8 +107,10 @@ const getAllEmployees = async () => {
     //Selecting all from the employee table 
     connection.query('SELECT * FROM employee', (err, res) => {
         if (err) throw err;
+        console.log('EMPLOYEES: ')
         //For each employee add their ID, first and last name, the department ID and manager ID
         res.forEach(employee => {
+            
             console.log(`ID: ${employee.id} -- Name: ${employee.first_name} ${employee.last_name} -- Role ID: ${employee.role_id} -- Manager ID: ${employee.manager_id}`);
         });
         //Return to the starting function 
@@ -122,8 +124,10 @@ const getAllDepartments = async () => {
     //Selecting all from the department table
     connection.query('SELECT * FROM department', (err, res) => {
         if (err) throw err;
+        console.log('DEPARTMENTS: ')
         //For each department add their name
         res.forEach(department => {
+            
             console.log(department.name);
         });
         //Return to the starting function 
@@ -135,8 +139,10 @@ const getAllDepartments = async () => {
 const getAllRoles = async () => {
     connection.query('SELECT * FROM roles', (err, res) => {
         if (err) throw err;
+        console.log('ROLES: ')
         //For each role add their title, salary, and department_id
         res.forEach(roles => {
+           
             console.log(`Title: ${roles.title} -- Yearly Salary: ${roles.salary} --Department ID: ${roles.department_id} `);
         });
         //Return to the starting function 
@@ -383,37 +389,4 @@ const deleteEmployee = () => {
 
 
 
-
-       /*     
-        const { last_name, first_name } = await inquirer.prompt([
-            {
-                message: 'What is the  name of the employee you want to delete?',
-                name: `${last_name} ${first_name}`,
-                type: 'list',
-                choices: res.map(({ last_name }) => last_name),
-            }
-        ]);
-        const { first_name } = await inquirer.prompt([
-            {
-                message: 'What is the first name of the employee you want to delete',
-                name: 'first_name',
-                type: 'list',
-                choices: res.map(({ first_name }) => first_name),
-            }
-        ]);
-        const query = 'DELETE FROM employee WHERE last_name =?, first_name =?';
-        connection.query(query(last_name, first_name), (err, res) => {
-            if (err) throw err;
-            console.log(`Deleted Employee: ${first_name} ${last_name}`, res);
-            getAllEmployees();
-        });
-            
-        } catch (error) {
-            console.log(error);
-            connection.end();
-
-            
-        }
-    })
-*/
 }
