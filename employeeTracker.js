@@ -23,6 +23,7 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
     if (err) throw err;
+    //Calling start function once connected 
     start();
 });
 
