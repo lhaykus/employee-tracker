@@ -166,11 +166,17 @@ const addRole = async () => {
             message: 'What is the yearly salary for this role?',
             type: 'input',
         }, {
-            name: 'departmentId',
+            name: 'department_id',
             message: 'What is the department ID for this role?',
             type: 'input',
         }
     ])
+    const query = 'INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)';
+    connection.query(query, [title, parseFloat(salary), parseInt(department_id)], (err, res) => {
+        if(err) throw err;
+        console.log(`Title: ${res.title} -- Yearly Salary ${res.salary} --Department ID ${res.department_id}`);
+    });
+    getAllRoles();
         
     } catch (error) {
         connection.end();
@@ -178,15 +184,38 @@ const addRole = async () => {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
 //Function to add an employee
+const addEmployee = async () => {
+    try {
+    const { first_name, last_name, role_id, manager_id } = await inquirer.prompt([
+        {
+            name: 'first_name',
+            message: 'What is the first name of the employee you want to add?',
+            type: 'input',
+        }, {
+            name: 'last_name',
+            message: 'What is the last name of the employee?',
+            type:'input',
+        }, {
+            name: 'role_id',
+            message: 'What is the role Id for new employee?',
+            type: 'input', 
+        }, {
+            name: 'manager_id',
+            message: 'What is the manager id for the new employee',
+            type: 'input',
+        }
+    ])
+    const query = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
+    connection.query(query, [first_name, last_name, parseInt(role_id), parseInt(manager_id)], (err, res) => {
+        if (err) throw err;
+        console.log(`First Name: ${res.first_name} --Last Name: ${res.last_name} --Role ID: ${res.role_id} --Manager ID: ${res.manager_id}`);
+
+    });
+    getAllEmployees();
+        
+    } catch (error) {
+        connection.end();
+        
+    }
+}
