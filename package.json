@@ -1,7 +1,7 @@
 {
   "name": "employee-tracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "An app on the terminal using node.js, inquierer, and MySQL to update, delete, view and add employees, roles, and departments for a compnay.",
   "main": "employeeTracker.js",
   "dependencies": {
     "console.table": "^0.10.0",

@@ -115,7 +115,7 @@ const getAllEmployees = async () => {
         //For each employee add their ID, first and last name, the department ID and manager ID
         res.forEach(employee => {
             
-            console.table([[`ID: ${employee.id} -- Name: ${employee.first_name} ${employee.last_name} -- Role ID: ${employee.role_id} -- Manager ID: ${employee.manager_id}`]]);
+            console.log(`ID: ${employee.id} -- Name: ${employee.first_name} ${employee.last_name} -- Role ID: ${employee.role_id} -- Manager ID: ${employee.manager_id}`);
         });
         //Return to the starting function 
         start();
