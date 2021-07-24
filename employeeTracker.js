@@ -115,7 +115,7 @@ const getAllEmployees = async () => {
         //For each employee add their ID, first and last name, the department ID and manager ID
         res.forEach(employee => {
             
-            console.log(`ID: ${employee.id} -- Name: ${employee.first_name} ${employee.last_name} -- Role ID: ${employee.role_id} -- Manager ID: ${employee.manager_id}`);
+            console.table([`ID: ${employee.id} -- Name: ${employee.first_name} ${employee.last_name} -- Role ID: ${employee.role_id} -- Manager ID: ${employee.manager_id}`]);
         });
         //Return to the starting function 
         start();
@@ -147,7 +147,7 @@ const getAllRoles = async () => {
         //For each role add their title, salary, and department_id
         res.forEach(roles => {
            
-            console.log(`Title: ${roles.title} -- Yearly Salary: ${roles.salary} --Department ID: ${roles.department_id} `);
+            console.table([`Title: ${roles.title} -- Yearly Salary: ${roles.salary} --Department ID: ${roles.department_id} `]);
         });
         //Return to the starting function 
         start();
